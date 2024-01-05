@@ -3,6 +3,7 @@ import { Head, Link } from "@inertiajs/react";
 import PrimaryButton from "@/Components/PrimaryButton";
 import Card from "@/Components/Card";
 
+
 export default function Dashboard({ auth }) {
     return (
         <AuthenticatedLayout
@@ -13,25 +14,13 @@ export default function Dashboard({ auth }) {
                 </h2>
             }
         >
-            <Head title="Dashboard" />
+            <Head title="Controll Ac" />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
-                            <Link href={route("dashboard.add")}>
-                                <PrimaryButton children="Tambah Ruangan" />
-                            </Link>
-
-                            <div className="flex flex-wrap justify-start gap-2 mt-5 ">
-                                <Link href={route("dashboard.controll")}>
-                                    <Card
-                                        data="Ruangan 1sdadsa"
-                                        on="On"
-                                        status="Online"
-                                    />
-                                </Link>
-                            </div>
+                         Controler Page
                         </div>
                     </div>
                 </div>

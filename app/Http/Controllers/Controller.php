@@ -13,4 +13,7 @@ class Controller extends BaseController
     public function addRuangan(){
        return inertia('AddRuangan');
     }
+    public function ControllAc(){
+        return inertia('ControlPage');
+    }
 }

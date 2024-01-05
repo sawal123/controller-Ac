@@ -4,7 +4,7 @@ import { Link } from "@inertiajs/react";
 function Card({ data, status, on }) {
     return (
         <div>
-            <Link>
+            {/* <Link> */}
                 <div className="border rounded-lg  w-auto h-auto p-5 transition-colors duration-300 ease-in-out hover:bg-slate-100 hover:shadow-lg">
                     <h4 className="text-lg font-bold">{data}</h4>
                     <div className="flex mt-3 gap-2">
@@ -17,7 +17,7 @@ function Card({ data, status, on }) {
                         </span>
                     </div>
                 </div>
-            </Link>
+            {/* </Link> */}
         </div>
     );
 }

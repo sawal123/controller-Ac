@@ -4,8 +4,10 @@ export default forwardRef(function TextInput(
     {
         type = "text",
         value,
+        name,
         className = "",
         placeholder,
+        onChange,
         isFocused = false,
         ...props
     },
@@ -30,6 +32,8 @@ export default forwardRef(function TextInput(
             ref={input}
             placeholder={placeholder}
             value={value}
+            name={name}
+            onChange={onChange}
         />
     );
 });

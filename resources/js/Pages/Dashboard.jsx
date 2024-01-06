@@ -3,7 +3,7 @@ import { Head, Link } from "@inertiajs/react";
 import PrimaryButton from "@/Components/PrimaryButton";
 import Card from "@/Components/Card";
 
-export default function Dashboard({ auth }) {
+export default function Dashboard({ auth, ruangan }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -24,13 +24,15 @@ export default function Dashboard({ auth }) {
                             </Link>
 
                             <div className="flex flex-wrap justify-start gap-2 mt-5 ">
-                                <Link href={route("dashboard.controll")}>
-                                    <Card
-                                        data="Ruangan 1sdadsa"
-                                        on="On"
-                                        status="Online"
-                                    />
-                                </Link>
+                                {ruangan.map((item, index) => (
+                                    <Link key={index} href={route("dashboard.controll")}>
+                                        <Card
+                                            data={item.nama}
+                                            on="On"
+                                            status="Online"
+                                        />
+                                    </Link>
+                                ))}
                             </div>
                         </div>
                     </div>

@@ -32,8 +32,9 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [Controller::class, 'Dashboard'])->name('dashboard');
     Route::get('/addRuangan', [Controller::class, 'addRuangan'])->name('dashboard.add');
-    Route::get('/controllAc', [Controller::class, 'ControllAc'])->name('dashboard.controll');
+    Route::get('/controllAc/{id}', [Controller::class, 'ControllAc'])->name('dashboard.controll');
     Route::post('/submitAdd', [AcController::class, 'addController'])->name('dashboard.submitAdd');
+    Route::post('/deleteAc/{id}', [AcController::class, 'deleteController'])->name('dashboard.deleteAc');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

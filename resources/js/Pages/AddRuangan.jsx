@@ -1,26 +1,27 @@
-import {useState} from "react";
+import { useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, useForm, router } from "@inertiajs/react";
+import { Head, useForm, router, usePage } from "@inertiajs/react";
 import PrimaryButton from "@/Components/PrimaryButton";
 import Card from "@/Components/Card";
 import TextInput from "@/Components/TextInput";
 import SecondaryButton from "@/Components/SecondaryButton";
 
-export default function AddRuangan({ auth }) {
-    const {data, post, processing, setData } = useForm({
+export default function AddRuangan({ auth, flashMessage }) {
+    const { data, post, processing, setData } = useForm({
         nama: "",
         kode: "",
     });
-   
+    // const { props } = usePage();
+    // const { flash } = props;
+    // console.log(flashMessage.message);
 
     const submit = (e) => {
         e.preventDefault();
         post(route("dashboard.submitAdd"));
         setData({
             nama: "",
-            kode: ""
-        })
-      
+            kode: "",
+        });
     };
     return (
         <AuthenticatedLayout
@@ -37,6 +38,11 @@ export default function AddRuangan({ auth }) {
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
                             <div className="mx-auto max-w-md text-center">
+                                {flashMessage.message && (
+                                    <div className="border p-4 rounded-lg my-3">
+                                        Data berhasil ditambah
+                                    </div>
+                                )}
                                 <form onSubmit={submit}>
                                     <TextInput
                                         type="text"
@@ -45,7 +51,9 @@ export default function AddRuangan({ auth }) {
                                         name="nama"
                                         isFocused={true}
                                         value={data.nama}
-                                        onChange={(e) => setData('nama', e.target.value)}
+                                        onChange={(e) =>
+                                            setData("nama", e.target.value)
+                                        }
                                     />
                                     <TextInput
                                         type="text"
@@ -54,7 +62,9 @@ export default function AddRuangan({ auth }) {
                                         name="kode"
                                         isFocused={true}
                                         value={data.kode}
-                                          onChange={(e) => setData('kode', e.target.value)}
+                                        onChange={(e) =>
+                                            setData("kode", e.target.value)
+                                        }
                                     />
                                     <PrimaryButton
                                         children="Tambah Ruangan"

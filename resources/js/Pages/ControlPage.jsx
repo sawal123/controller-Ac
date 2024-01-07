@@ -1,9 +1,19 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, useForm } from "@inertiajs/react";
 import PrimaryButton from "@/Components/PrimaryButton";
+import DangerButton from "@/Components/DangerButton";
 import Card from "@/Components/Card";
 
-export default function Dashboard({ auth }) {
+export default function Dashboard({ auth , data}) {
+    const {post, processing} = useForm();
+    console.log(data.id);
+    const submit=(e)=>{
+        e.preventDefault();
+        console.log(data.id);
+        if(confirm("Yakin Hapus Data?")){
+            post(route("dashboard.deleteAc", {id: data.id}))
+        }
+    }
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -20,9 +30,17 @@ export default function Dashboard({ auth }) {
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
                             <div className="p-4 flex justify-between border rounded-md">
-                                <p>Ruangan 1</p>
-                                <p>Status: Online</p>
+                                <p>{data.nama}</p>
+                                {/* <p>Status: Online</p> */}
+                                <div className="flex gap-2" >
+                                    <PrimaryButton children="Edit" />
+                                    <form onSubmit={submit}>
+                                        <DangerButton type="submit"  disabled={processing} children="Hapus" />
+                                    </form>
+                                    
+                                </div>
                             </div>
+                            
 
                             <div className="flex justify-center mt-10 gap-3">
                                 <div className="rounded-full transition-colors duration-300 hover:shadow-md ease-in-out hover:text-white hover:bg-red-700 p-5 border w-16 h-16 flex items-center justify-center cursor-pointer">

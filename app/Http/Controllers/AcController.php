@@ -19,7 +19,16 @@ class AcController extends Controller
         'kode'=> $request->kode
       ]);
       
-      return redirect('/addRuangan');
+      return redirect(route('dashboard.add'))->with([
+        'message' => 'Data Berhasil Ditambah'
+      ]);
      
+    }
+    public function deleteController(Request $request){
+      $ruangan = Ruangan::where('id', $request->id)->first();
+      $ruangan->delete();
+      return redirect(route('dashboard'))->with([
+        'message' => 'Data '. $ruangan->nama .' Berhasil DiHapus'
+      ]);
     }
 }

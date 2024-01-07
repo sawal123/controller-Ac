@@ -22,7 +22,11 @@ class Controller extends BaseController
     public function addRuangan(){
        return inertia('AddRuangan');
     }
-    public function ControllAc(){
-        return inertia('ControlPage');
+    public function ControllAc($id){
+        $data=Ruangan::where('id',$id)->first();
+        // dd($data);
+        return inertia('ControlPage',[
+            'data'=> $data
+        ]);
     }
 }

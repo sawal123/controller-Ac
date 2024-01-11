@@ -6,19 +6,18 @@ import Card from "@/Components/Card";
 import TextInput from "@/Components/TextInput";
 import SecondaryButton from "@/Components/SecondaryButton";
 
-export default function AddRuangan({ auth, flashMessage }) {
+export default function AddRuangan({ auth,  ruangan}) {
     const { data, post, processing, setData } = useForm({
-        nama: "",
-        kode: "",
+        id: ruangan.id,
+        nama: ruangan.nama,
+        kode: ruangan.kode,
     });
-    // const { props } = usePage();
-    // const { flash } = props;
-    // console.log(flashMessage.message);
 
     const submit = (e) => {
         e.preventDefault();
-        post(route("dashboard.submitAdd"));
+        post(route("dashboard.submitEdit"));
         setData({
+            id: "",
             nama: "",
             kode: "",
         });
@@ -28,7 +27,7 @@ export default function AddRuangan({ auth, flashMessage }) {
             user={auth.user}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Tambah Ruangan
+                    Edit Ruangan
                 </h2>
             }
         >
@@ -38,12 +37,9 @@ export default function AddRuangan({ auth, flashMessage }) {
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
                             <div className="mx-auto max-w-md text-center">
-                                {flashMessage.message && (
-                                    <div className="border p-4 rounded-lg my-3">
-                                        {flashMessage.message}
-                                    </div>
-                                )}
+                               
                                 <form onSubmit={submit}>
+                                    <TextInput type="hidden" name="id" value={data.id} />
                                     <TextInput
                                         type="text"
                                         className="block mb-4 mx-auto w-full"
@@ -67,7 +63,7 @@ export default function AddRuangan({ auth, flashMessage }) {
                                         }
                                     />
                                     <PrimaryButton
-                                        children="Tambah Ruangan"
+                                        children="Update Ruangan"
                                         className="w-full "
                                         type="submit"
                                         processing={processing}

@@ -4,16 +4,16 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import DangerButton from "@/Components/DangerButton";
 import Card from "@/Components/Card";
 
-export default function Dashboard({ auth , data}) {
-    const {post, processing} = useForm();
+export default function Dashboard({ auth, flashMessage, data }) {
+    const { post, processing } = useForm();
     console.log(data.id);
-    const submit=(e)=>{
+    const submit = (e) => {
         e.preventDefault();
         console.log(data.id);
-        if(confirm("Yakin Hapus Data?")){
-            post(route("dashboard.deleteAc", {id: data.id}))
+        if (confirm("Yakin Hapus Data?")) {
+            post(route("dashboard.deleteAc", { id: data.id }));
         }
-    }
+    };
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -29,18 +29,31 @@ export default function Dashboard({ auth , data}) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
+                            {flashMessage.message && (
+                                <div className="border p-4 bg-blue-500 text-white rounded-lg my-3">
+                                    {flashMessage.message}
+                                </div>
+                            )}
                             <div className="p-4 flex justify-between border rounded-md">
                                 <p>{data.nama}</p>
                                 {/* <p>Status: Online</p> */}
-                                <div className="flex gap-2" >
-                                    <PrimaryButton children="Edit" />
+                                <div className="flex gap-2">
+                                    <Link
+                                        href={route("dashboard.edit", {
+                                            id: data.id,
+                                        })}
+                                    >
+                                        <PrimaryButton children="Edit" />
+                                    </Link>
                                     <form onSubmit={submit}>
-                                        <DangerButton type="submit"  disabled={processing} children="Hapus" />
+                                        <DangerButton
+                                            type="submit"
+                                            disabled={processing}
+                                            children="Hapus"
+                                        />
                                     </form>
-                                    
                                 </div>
                             </div>
-                            
 
                             <div className="flex justify-center mt-10 gap-3">
                                 <div className="rounded-full transition-colors duration-300 hover:shadow-md ease-in-out hover:text-white hover:bg-red-700 p-5 border w-16 h-16 flex items-center justify-center cursor-pointer">

@@ -11,22 +11,30 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    public function Dashboard(){
+    public function Dashboard()
+    {
         $ruangan = Ruangan::all();
         // dd($ruangan);
         return inertia('Dashboard', [
-            'ruangan'=>$ruangan
+            'ruangan' => $ruangan
         ]);
     }
 
-    public function addRuangan(){
-       return inertia('AddRuangan');
+    public function addRuangan()
+    {
+        return inertia('AddRuangan');
     }
-    public function ControllAc($id){
-        $data=Ruangan::where('id',$id)->first();
+    public function editRuangan($id)
+    {
+        $ruangan = Ruangan::where('id', $id)->first();
+        return inertia('EditRuangan', ['ruangan' => $ruangan]);
+    }
+    public function ControllAc($id)
+    {
+        $data = Ruangan::where('id', $id)->first();
         // dd($data);
-        return inertia('ControlPage',[
-            'data'=> $data
+        return inertia('ControlPage', [
+            'data' => $data
         ]);
     }
 }
